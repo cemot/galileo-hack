@@ -48,6 +48,6 @@ if avg_body_temp >= BODY_TEMP_LOW and avg_body_temp <= BODY_TEMP_HIGH and avg_he
 	is_healthy = 1;
 
 f = open('info.js','w')
-f.write('{0} {1} {2} {3} {4}'.format(avg_lat, avg_lon, avg_body_temp, avg_heart_rate, is_healthy))
+f.write('[{0} {1} {2} {3} {4}]'.format(avg_lat, avg_lon, avg_body_temp, avg_heart_rate, is_healthy))
 f.close()
 
