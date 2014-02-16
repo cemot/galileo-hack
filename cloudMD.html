@@ -25,11 +25,15 @@
 
     var clearArea;
 
+    var sampleArea;
+
     var areas = [];
 
     var polyCoords = [];
 
     var polyCoords2 = [];
+
+    var polyCoords3 = [];
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -39,7 +43,7 @@
     areas.push([37.808097, -122.408050, 88.7, 90, 0])
     areas.push([37.798543, -122.396409, 99.3, 50, 0])
     areas.push([37.784155, -122.422815, 98.7, 87, 1])
-    areas.push([37.789476, -122.438096, 98.6, 39, 0])
+    areas.push([37.789476, -122.438096, 104.6, 99, 0, 'measels!!!'])
     areas.push([37.782526, -122.460063, 97.6, 76, 0])
 
     var marker, i;
@@ -51,21 +55,47 @@
         position: new google.maps.LatLng(areas[i][0], areas[i][1]),
         map: map
       });
-    for (i = 0; i < locations.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-        map: map
-      });
-    }
 
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+    if (areas[i].length > 5) {
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          healthIndex = areas[i][4];
+          infowindow.setContent(areas[i][5].toUpperCase() + " " + healthy[healthIndex] + ". Temperature: " + areas[i][2] + " Heart rate: " + areas[i][3]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+      }
+      else {
+
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           healthIndex = areas[i][4];
           infowindow.setContent( healthy[healthIndex] + ". Temperature: " + areas[i][2] + " Heart rate: " + areas[i][3]);
           infowindow.open(map, marker);
+
         }
       })(marker, i));
     }
+  }
+
+    for (i = 0; i < spots.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(spots[i][0], spots[i][1]),
+        map: map
+      });
+  
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          healthIndex = spots[i][4];
+          infowindow.setContent( healthy[healthIndex] + ". Temperature: " + spots[i][2] + " Heart rate: " + spots[i][3]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+
+    }
+    
 
 
     for (var i = 0; i < areas.length; i++) {
@@ -96,7 +126,23 @@
     fillOpacity: 0.35
   });
 
+    for (var i = 0; i < spots.length; i++) {
+      if (spots[i][4] == 0) {
+        myLatLng = new google.maps.LatLng(spots[i][0], spots[i][1]);
+        polyCoords3.push(myLatLng);
+      }
+    }
 
+    sampleArea = new google.maps.Polygon({
+    paths: polyCoords3,
+    strokeColor: '#ff0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 3,
+    fillColor: '#00af81',
+    fillOpacity: 0.35
+  });
+
+  sampleArea.setMap(map);
   cleanArea.setMap(map);
   diseaseArea.setMap(map);
 
