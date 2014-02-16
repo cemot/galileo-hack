@@ -8,18 +8,18 @@ USER_AGENT = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)"
 br = Browser()
 br.addheaders = [("User-agent", USER_AGENT)]
 
-url = "https://manager.enableiot.com/"
-br.open("url")
+url = "https://manager.enableiot.com/sensors/login/loginPage.html"
+br.open(url)
 
 br.select_form(nr=0)
-br['username'] = "donwshin@gmail.com"
-br['password'] = "ilovepasswords"
-br['account'] = "Doctor Cloud"
+br['j_username'] = "donwshin@gmail.com"
+br['j_password'] = "ilovepasswords"
+br['company'] = "DoctorCloud"
 
 response = br.submit()
 
 print response.read()
 
-(filename, headers) = br.retrieve(url, filename)
-f = br.retrieve('https://manager.enableiot.com/sensors/servlet/GraphFileDownloadServlet?customerName=DoctorCloud&deviceIds=251561%2C251561%2C&metricNames=bodytemp%2Cheartbeat%2C&endDate=1392577840000&startDate=1392577440000&maxPoints=800')[0]
-print f 
+
+f = br.retrieve(raw_input(), 'DoctorCloud.xls')[0]
+print f
