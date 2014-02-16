@@ -17,8 +17,8 @@ for rownum in range(1, sh.nrows):
     cars['Device'] = row_values[1]
     cars['Measurement'] = row_values[2]
     cars['Value'] = row_values[3]
-    #cars['Latitude'] = row_values[4]
-    #cars['Longitude'] = row_values[5]
+    cars['Lat'] = row_values[4]
+    cars['Long'] = row_values[5]
  
     cars_list.append(cars)
  
