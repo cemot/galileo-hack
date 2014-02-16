@@ -50,4 +50,4 @@ def analyze(readings):
 	if avg_body_temp >= BODY_TEMP_LOW and avg_body_temp <= BODY_TEMP_HIGH and avg_heart_rate >= HEART_RATE_LOW and avg_heart_rate <= HEART_RATE_HIGH:
 		is_healthy = 1;
 
-	return [avg_lat, avg_lon, avg_body_temp, avg_heart_rate, is_healthy]
+	print([avg_lat, avg_lon, avg_body_temp, avg_heart_rate, is_healthy])
