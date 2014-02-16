@@ -18,7 +18,7 @@ for reading in readings:
 		heart_rates.append(reading["Value"])
 	elif reading["Measurement"] == "lat":
 		lat_readings.append(reading["Value"])
-	else:
+	elif reading["Measurement"] == "long":
 		lon_readings.append(reading["Value"])
 
 if len(body_temps) > 0:
