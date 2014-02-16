@@ -1,5 +1,5 @@
 import json
-json_data=open('poop.json')
+json_data=open('data.json')
 
 readings = json.load(json_data)
 json_data.close()
